@@ -1,4 +1,4 @@
-# How to setup the economic development demo
+# How to setup an economic development demo
 Create all the GCP resources required to present an analytics demo on workforce development for state governments
 
 <p align="center">
