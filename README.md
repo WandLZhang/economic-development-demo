@@ -36,7 +36,7 @@ Create all the GCP resources required to present an analytics demo on workforce 
 
 `python3 setup_models.py`
 
-##### Part 2 (after models from Part 1 complete): Run model predictions
+##### Part 2 (after models from Part 1 complete): Find feature importance
 
 7. Optional for live demos: deploy the AutoML Tables model, `labor_force_prediction`, which takes predicts labor force engagement based on 71 features, by running this script:
 
@@ -71,7 +71,7 @@ Your tables should look like this afterwards:
   <img src="https://storage.googleapis.com/github-economic-development-demo/github-2.png" width="600px"/>
 </p>
 
-#### Part 3: Create and modify the slides
+#### Part 3: Use BQ ML to run predictions
 
 12. The regression ML model, `bqml_economic_impact`, outputs an average income, given a census tract and % not in the labor force as inputs. Replace `<state_abbreviation>` when running this query:
 
