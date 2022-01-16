@@ -14,7 +14,7 @@ Create all the GCP resources required to present an analytics demo on workforce 
 
 ### Steps
 
-##### Part 1: Setup tables and models
+#### Part 1: Setup tables and models
 
 1. In a terminal, clone the repository code:
 
@@ -36,7 +36,7 @@ Create all the GCP resources required to present an analytics demo on workforce 
 
 `python3 setup_models.py`
 
-##### Part 2 (after models from Part 1 complete): Find feature importance
+#### Part 2 (after models from Part 1 complete): Find feature importance
 
 7. Optional for live demos: deploy the AutoML Tables model, `labor_force_prediction`, which takes predicts labor force engagement based on 71 features, by running this script:
 
