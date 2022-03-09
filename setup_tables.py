@@ -57,6 +57,46 @@ print("Loading {0}".format(table_id))
 bq.query(updated_query_string_2).result() # Wait for the query to complete
 print("Query results loaded to the table {0}".format(table_id))
 
+# Create median_income_diff_by_zipcode table
+table_id = staging_dataset_id + ".median_income_diff_by_zipcode"
+base_query_string_1 = """CREATE OR REPLACE TABLE `{0}` AS(
+  WITH
+    acs_2018 AS (
+    SELECT
+      geo_id,
+      median_income AS median_income_2018
+    FROM
+      `bigquery-public-data.census_bureau_acs.zip_codes_2018_5yr` ),
+    acs_2015 AS (
+    SELECT
+      geo_id,
+      median_income AS median_income_2015
+    FROM
+      `bigquery-public-data.census_bureau_acs.zip_codes_2015_5yr` ),
+    acs_diff AS (
+    SELECT
+      a18 .geo_id,
+      a18.median_income_2018,
+      a15.median_income_2015,
+      (a18.median_income_2018 - a15.median_income_2015) AS median_income_diff,
+    FROM
+      acs_2018 a18
+    JOIN
+      acs_2015 a15
+    ON
+      a18.geo_id = a15.geo_id )
+  SELECT
+    *
+  FROM
+    acs_diff
+  WHERE
+    median_income_diff IS NOT NULL )"""
+updated_query_string_2 = base_query_string_1.format(table_id)
+
+print("Loading {0}".format(table_id))
+bq.query(updated_query_string_2).result() # Wait for the query to complete
+print("Query results loaded to the table {0}".format(table_id))
+
 # Create census_zip table
 table_id = staging_dataset_id + ".census_zip"
 ref_table_id = staging_dataset_id + ".median_income_diff_by_zipcode"
